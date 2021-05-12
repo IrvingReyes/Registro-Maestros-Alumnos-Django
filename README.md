@@ -1,0 +1,2 @@
+# Registro-Maestros-Alumnos-Django
+Sistema web que perimta el registro de maestros y alumnos de de primaria de una escual X.  - Vas a necesitar dos formularios de registro: uno para maestros y otro para registrar alumnos - Los maestros tienen los siguientes datos asociados: nombre, dirección, teléfono - Los estudiantes tienen los siguientes datos asociados: nombre, dirección, maestro (sólo uno), salón
