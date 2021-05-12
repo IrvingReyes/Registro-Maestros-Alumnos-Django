@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+
+<html lang="ex-MX">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <title>{% block titulo %}{% endblock %}</title>
+    {% block scripts %}{% endblock %}
+    {% block estilos %}{% endblock %}
+  </head>
+  <body>
+
+    <header class="container">
+      <h1 class="jumbotron">{% block encabezado %}{% endblock %}</h1>
+    </header>
+
+     <div class="row">
+      <section class="container col-10">
+    {% block  error %} {% endblock %}
+      </section>
+    </div>
+
+
+    <div class="row">
+      <section class="container col-10">
+	{% block cuerpo %}{% endblock %}
+      </section>
+    </div>
+
+
+    <footer>
+        <center> <h3> Escuela Primaria Porfirio Díaz </h3> </center>
+    </footer>
+  </body>
+</html>

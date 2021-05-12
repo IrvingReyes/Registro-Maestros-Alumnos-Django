@@ -1,0 +1,90 @@
+{% extends 'baseRegistroPrimaria.html' %}
+
+{% block titulo %} Registro de Maestros{% endblock %}
+
+{% block scripts %}
+<script>
+(function() {
+    window.onload = function() {
+        $("#divError").hide();
+        var formularioMaestro = document.getElementById("formularioMaestro");
+
+        formularioMaestro.onsubmit = function() {
+
+            var nombreMaestro =	document.getElementById("nombre").value;
+            var n = nombreMaestro.search(/[a-zA-Z]{4}/i);
+            if (n == 0 && nombreMaestro.length < 50) {
+                console.log("Nombre Válido")
+			} else {
+			    $("#divError").show();
+				$("#contenidoError").text("Nombre inválido");
+				return false;
+			}
+
+
+            var direccionMaestro = document.getElementById("direccion").value;
+            var n = direccionMaestro.search(/[a-zA-Z]{4}/i);
+            if (n == 0 && direccionMaestro.length < 50) {
+				console.log("Direccion Valida" );
+			} else {
+			    $("#divError").show();
+				$("#contenidoError").text("Dirección inválida");
+				return false;
+			}
+
+
+			var telefonoMaestro  = document.getElementById("telefono").value;
+            var n = telefonoMaestro.search(/[0-9]{8}/i);
+            if (n == 0 && telefonoMaestro.length < 20) {
+                console.log("Maestro Válido");
+				alert("Registro Exitoso" );
+			} else {
+			    $("#divError").show();
+				$("#contenidoError").text("Teléfono inválido");
+				return false;
+			}
+
+
+
+        } //fin formulario
+
+    }
+
+
+})();
+
+</script>
+{% endblock %}
+
+{% block encabezado %}Registro de Maestro{% endblock %}
+
+{% block error %}
+
+<div id="divError" class="panel panel-danger">
+  <div class="panel-heading">Ha ocurrido un error en el registro</div>
+    <div id="contenidoError" class="panel-body">  </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block cuerpo %}
+
+<form id="formularioMaestro" class="form-horizontal"  action="/RegistroMaestros" method="POST">
+    {% csrf_token %}
+  <label for="nombre">Nombre:</label><br>
+  <input type="text" id="nombre" name="nombre"><br>
+  <label for="direccion">Dirección:</label><br>
+  <input type="text" id="direccion" name="direccion"><br>
+  <label for="telefono">Teléfono</label><br>
+  <input type="tel" id="telefono" name="telefono"><br><br>
+
+  <input type="submit" value="Submit">
+
+</form>
+
+
+
+{% endblock %}
+

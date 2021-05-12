@@ -1,0 +1,89 @@
+{% extends 'baseRegistroPrimaria.html' %}
+
+{% block titulo %} Registro de Alumnos{% endblock %}
+
+{% block scripts %}
+<script>
+(function() {
+    window.onload = function() {
+        $("#divError").hide();
+        var formularioAlumno = document.getElementById("formularioAlumno");
+
+        formularioAlumno.onsubmit = function() {
+
+            var nombreAlumno =	document.getElementById("nombre").value;
+            var n = nombreAlumno.search(/[a-zA-Z]{4}/i);
+            if (n == 0 && nombreAlumno.length < 50) {
+                console.log("Nombre Válido")
+			} else {
+			    $("#divError").show();
+				$("#contenidoError").text("Nombre inválido");
+				return false;
+			}
+
+
+            var direccionAlumno = document.getElementById("direccion").value;
+            var n = direccionAlumno.search(/[a-zA-Z]{4}/i);
+            if (n == 0 && direccionAlumno.length < 50) {
+				console.log("Dirección Válida")
+			} else {
+			    $("#divError").show();
+				$("#contenidoError").text("Dirección inválida");
+				return false;
+			}
+
+			var direccionSalon = document.getElementById("salon").value;
+            var n = direccionSalon.search(/[0-9]-[A-Z]/g);
+            if (n == 0) {
+                console.log("Salón Válido")
+				alert("Registro Exitoso");
+			} else {
+			    $("#divError").show();
+				$("#contenidoError").text("Salón inválido");
+				return false;
+			}
+
+        }
+
+    }
+})();
+</script>
+{% endblock %}
+
+{% block encabezado %}Registro de Alumnos{% endblock %}
+
+{% block error %}
+<div id="divError" class="panel panel-danger">
+  <div class="panel-heading">Ha ocurrido un error en el registro</div>
+    <div id="contenidoError" class="panel-body">  </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block cuerpo %}
+
+<form id="formularioAlumno" class="form-horizontal"  action="/RegistroAlumnos" method="POST">
+    {% csrf_token %}
+  <label for="nombre">Nombre:</label><br>
+  <input type="text" id="nombre" name="nombre"><br>
+  <label for="direccion">Dirección:</label><br>
+  <input type="text" id="direccion" name="direccion"><br>
+  <label for="maestro">Maestro:</label><br>
+  <select class="form-control"  id="maestro" name="maestro" form="formularioAlumno">
+      {% for maestro in maestros %}
+      <option value="{{ maestro.pk }}">{{ maestro.nombre }}</option>
+      {% endfor %}
+
+  </select> <br>
+
+  <label for="salon">Salón</label><br>
+  <input type="text" id="salon" name="salon"><br><br>
+
+  <input type="submit" value="Submit">
+
+</form>
+
+
+
+{% endblock %}
